@@ -8,18 +8,10 @@ data "aws_iam_policy_document" "logging_role_policydoc" {
       "logs:CreateLogStream",
       "logs:PutLogEvents",
       "logs:PutMetricFilter",
-      "logs:PutRetentionPolicy",
-      "logs:GetLoggingOptions",
-      "logs:SetLoggingOptions",
-      "logs:SetV2LoggingOptions",
-      "logs:GetV2LoggingOptions",
-      "logs:SetV2LoggingLevels",
-      "logs:ListV2LoggingLevels",
-      "logs:DeleteV2LoggingLevels"
+      "logs:PutRetentionPolicy"
     ]
     resources = [
-      # "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group::${log-stream}:",
-      "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group::/aws/iot/"
+      "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:AWSIotLogsV2*"
     ]
   }
 }
