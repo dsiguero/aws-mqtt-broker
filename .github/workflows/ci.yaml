@@ -12,6 +12,8 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
+      - name: Test
+        run:  ls -la
       - name: Terraform fmt
         run:  docker run -v "$PWD":/mnt -w /mnt hashicorp/terraform:$(cat .terraform-version) fmt
       - name: Render Terraform docs and push changes back to master
