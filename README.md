@@ -74,15 +74,23 @@ Example:
 terraform output -raw aws_iot_root_ca_certificate
 
 # get the PEM certificate
-terraform output -raw iot_certificate.cert
+terraform output -json iot_certificate | jq -r '.cert'
 
 # get the public key
-terraform output -raw iot_certificate.public_key
+terraform output -json iot_certificate | jq -r '.public_key'
 
 # get the private key
-terraform output -raw iot_certificate.private_key
+terraform output -json iot_certificate | jq -r '.private_key'
 ```
 
 Check the available outputs [here](output.md).
 
 
+### Validate certificates
+
+```sh
+openssl s_client -connect custom_endpoint.iot.aws-region.amazonaws.com:8443 \
+  -CAfile CA.pem \
+  -cert cert.pem \
+  -key privateKey.pem
+```
