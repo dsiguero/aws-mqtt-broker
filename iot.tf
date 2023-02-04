@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "iot_thing" {
   statement {
     effect    = "Allow"
     actions   = ["iot:*"]
-    resources = ["arn:aws:s3:::*"]
+    resources = ["*"]
   }
 }
 
