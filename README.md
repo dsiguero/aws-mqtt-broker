@@ -1,5 +1,12 @@
 # aws-mqtt-broker
 
+## Terraform stack
+<!-- BEGIN_TF_DOCS -->
+
+
+<!-- END_TF_DOCS --> 
+
+## Tips
 
 ### Check connection with AWS IoT endpoint
 ```
@@ -31,3 +38,5 @@ terraform output -raw iot_certificate.private_key
 ```
 
 Check the available outputs [here](output.md).
+
+
