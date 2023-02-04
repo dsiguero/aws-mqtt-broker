@@ -4,8 +4,8 @@ on:
       - master
 name: ci
 jobs:
-  release-please:
-    name: Release ${{ github.event.repository.name }}
+  format:
+    name: Format ${{ github.event.repository.name }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
