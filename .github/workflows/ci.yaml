@@ -26,6 +26,9 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add .
-          git commit -m "chore: formatting and documentation"
-          git push
+
+          if [[ $(git status --porcelain) ]]; then
+            git add .
+            git commit -m "chore: formatting and documentation"
+            git push
+          fi
