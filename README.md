@@ -65,7 +65,7 @@ mosquitto_pub -h "${IOT_HOST}" -p 8883 \
 
 ### Get IoT and Root CA certificates from Terraform
 
-Use `terraform output -raw <output_key>` to retrieve individual keys from the Terraform outputs.
+Use `terraform output -raw <output_key>` or `terraform output -json` to retrieve individual keys from the Terraform outputs.
 
 Example:
 
@@ -83,7 +83,7 @@ terraform output -json iot_certificate | jq -r '.public_key'
 terraform output -json iot_certificate | jq -r '.private_key'
 ```
 
-Check the available outputs [here](output.md).
+Check the available outputs [here](#outputs).
 
 
 ### Validate certificates
