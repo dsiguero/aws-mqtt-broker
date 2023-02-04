@@ -12,7 +12,7 @@ variable "aws_iot_ca_cert_url" {
 variable "iot_thing_name" {}
 
 variable "iot_loglevel" {
-  type = "string"
+  type    = string
   default = "WARN"
   validation {
     condition     = contains(["DEBUG", "INFO", "ERROR", "WARN", "DISABLED"], var.iot_loglevel)

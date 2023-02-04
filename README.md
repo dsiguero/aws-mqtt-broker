@@ -37,10 +37,10 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_iot_loglevel"></a> [iot\_loglevel](#input\_iot\_loglevel) | n/a | `any` | n/a | yes |
 | <a name="input_iot_thing_name"></a> [iot\_thing\_name](#input\_iot\_thing\_name) | n/a | `any` | n/a | yes |
 | <a name="input_aws_iot_ca_cert_url"></a> [aws\_iot\_ca\_cert\_url](#input\_aws\_iot\_ca\_cert\_url) | URL for the AWS IoT Root CA Certificate | `string` | `"https://www.amazontrust.com/repository/AmazonRootCA1.pem"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | n/a | `string` | `"eu-west-1"` | no |
+| <a name="input_iot_loglevel"></a> [iot\_loglevel](#input\_iot\_loglevel) | n/a | `string` | `"WARN"` | no |
 
 ### Outputs
 
