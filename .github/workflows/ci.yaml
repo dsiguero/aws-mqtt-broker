@@ -22,8 +22,8 @@ jobs:
           docker run -v "$PWD":/data \
             -e DELIM_START='<!-- BEGIN_TF_DOCS -->' \
             -e DELIM_CLOSE='<!-- END_TF_DOCS -->' \
-            cytopia/terraform-docs \
-            terraform-docs-replace-012 --sort-by-required md README.md
+            cytopia/terraform-docs:0.16.0 \
+            terraform-docs-replace-012 --sort-by required md README.md
 
       - name: Push changes back to branch
         run: |
