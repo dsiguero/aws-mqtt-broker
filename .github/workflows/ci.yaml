@@ -13,14 +13,22 @@ jobs:
         with:
           ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || 'master' }}
           fetch-depth: 0
-      - name: Test
-        run:  ls -la
+      
       - name: Terraform fmt
         run:  docker run -v "$PWD":/mnt -w /mnt hashicorp/terraform:$(cat .terraform-version) fmt
-      - name: Render terraform docs inside the README.md and push changes back to PR branch
-        uses: terraform-docs/gh-actions@v1.0.0
-        with:
-          working-dir: .
-          output-file: README.md
-          output-method: inject
-          git-push: "true"
+
+      - name: Generate Terraform docs
+        run: |
+          docker run -v "$PWD":/data \
+            -e DELIM_START='<!-- BEGIN_TF_DOCS -->' \
+            -e DELIM_CLOSE='<!-- END_TF_DOCS -->' \
+            cytopia/terraform-docs \
+            terraform-docs-replace-012 --sort-by-required md README.md
+
+      - name: Push changes back to branch
+        run: |
+          git config user.name github-actions
+          git config user.name github-actions@github.com
+          git add .
+          git commit -m "chore: formatting and documentation"
+          git push
