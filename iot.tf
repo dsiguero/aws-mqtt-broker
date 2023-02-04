@@ -3,19 +3,19 @@ resource "aws_iot_thing" "home_assistant" {
 }
 
 resource "aws_iot_certificate" "cert" {
-    active = true
+  active = true
 }
 
 data "aws_iam_policy_document" "iot_thing" {
   statement {
-    effect = "Allow"
-    actions = [ "iot:*" ]
-    resources = [ "arn:aws:s3:::*" ]
+    effect    = "Allow"
+    actions   = ["iot:*"]
+    resources = ["arn:aws:s3:::*"]
   }
 }
 
 resource "aws_iot_policy" "pubsub" {
-  name = "AllowAll"
+  name   = "AllowAll"
   policy = data.aws_iam_policy_document.iot_thing.json
 }
 

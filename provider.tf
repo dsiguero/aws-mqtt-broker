@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "aws-mqtt-broker-tfstate"
-    key = "dev/terraform.tfstate"
+    key    = "dev/terraform.tfstate"
     region = "eu-west-1"
   }
 
