@@ -1,0 +1,22 @@
+on:
+  pull_request:
+    branches:
+      - master
+name: ci
+jobs:
+  release-please:
+    name: Release ${{ github.event.repository.name }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: Terraform fmt
+        run:  docker run -v "$PWD":/mnt -w /mnt hashicorp/terraform:$(cat .terraform-version) fmt
+      - name: Render Terraform docs and push changes back to master
+        uses: terraform-docs/gh-actions@v1
+        with:
+          working-dir: .
+          config-file: .terraform-docs.yaml
+          git-push: true
+          git-commit-message: 'docs: automated action'
