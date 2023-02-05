@@ -99,3 +99,9 @@ openssl s_client -connect custom_endpoint.iot.aws-region.amazonaws.com:8443 \
   -cert cert.pem \
   -key privateKey.pem
 ```
+
+### Create mosquitto password file
+
+```sh
+mosquitto_passwd -c <password_file> <username>
+```
