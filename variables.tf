@@ -22,5 +22,5 @@ variable "iot_loglevel" {
 
 variable "iot_topic_name" {
   description = "Name of the topic (allows wildcards) for the query that gets data into DynamoDB"
-  type = string
+  type        = string
 }

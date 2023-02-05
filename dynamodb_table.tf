@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "iot_topic_data" {
-  name = "iot-topic-data"
+  name           = "iot-topic-data"
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
   write_capacity = 2
@@ -19,9 +19,9 @@ resource "aws_dynamodb_table" "iot_topic_data" {
 
 data "aws_iam_policy_document" "push_to_dynamo_policydoc" {
   statement {
-    effect = "Allow"
-    actions = [ "dynamodb:PutItem" ]
-    resources = [ aws_dynamodb_table.iot_topic_data.arn ]
+    effect    = "Allow"
+    actions   = ["dynamodb:PutItem"]
+    resources = [aws_dynamodb_table.iot_topic_data.arn]
   }
 }
 

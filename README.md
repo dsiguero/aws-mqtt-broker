@@ -20,16 +20,20 @@
 
 | Name | Type |
 |------|------|
+| [aws_dynamodb_table.iot_topic_data](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table) | resource |
 | [aws_iam_role.iot_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.iot_push_to_dynamo](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iot_certificate.cert](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iot_certificate) | resource |
 | [aws_iot_logging_options.logging_config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iot_logging_options) | resource |
 | [aws_iot_policy.pubsub](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iot_policy) | resource |
 | [aws_iot_policy_attachment.policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iot_policy_attachment) | resource |
 | [aws_iot_thing.home_assistant](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iot_thing) | resource |
+| [aws_iot_topic_rule.push_to_dynamo](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iot_topic_rule) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume_role_policydoc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.iot_thing](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.logging_role_policydoc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.push_to_dynamo_policydoc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iot_endpoint.endpoint](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iot_endpoint) | data source |
 | [http_http.aws_iot_root_ca_cert](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
@@ -41,6 +45,7 @@
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | n/a | `string` | `"eu-west-1"` | no |
 | <a name="input_iot_loglevel"></a> [iot\_loglevel](#input\_iot\_loglevel) | n/a | `string` | `"WARN"` | no |
 | <a name="input_iot_thing_name"></a> [iot\_thing\_name](#input\_iot\_thing\_name) | n/a | `any` | n/a | yes |
+| <a name="input_iot_topic_name"></a> [iot\_topic\_name](#input\_iot\_topic\_name) | Name of the topic (allows wildcards) for the query that gets data into DynamoDB | `string` | n/a | yes |
 
 ### Outputs
 
