@@ -1,0 +1,25 @@
+---
+alias: em_data_to_aws_iot
+description: "Push energy consumption data to AWS IoT"
+trigger:
+  - platform: time_pattern
+    hours: 00
+    minutes: '/1'
+    seconds: 00
+condition: []
+action:
+  - service: mqtt.publish
+    data:
+      qos: 0
+      retain: false
+      topic: homeassistant/energy_measurement
+      payload_template: |
+        {
+          "date": "{{ utcnow().date() }}",
+          "time": "{{ utcnow().strftime('%H:%M:%S.%f')[:-3] }}",
+          "energy_kwh": "{{ states('sensor.shelly_em_channel_1_energy') }}",
+          "power_w": "{{ states('sensor.shelly_em_channel_1_power') }}",
+          "power_factor_percent": "{{ states('sensor.shelly_em_channel_1_power_factor') }}",
+          "voltage_v": "{{ states('sensor.shelly_em_channel_1_voltage') }}"
+        }
+mode: single
