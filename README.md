@@ -1,5 +1,9 @@
 # aws-mqtt-broker
 
+## Overview
+
+![overview architecture](./docs/img/overview_arch.png "Architecture")
+
 ## Terraform stack
 <!-- BEGIN_TF_DOCS -->
 ### Requirements
