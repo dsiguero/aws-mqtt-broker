@@ -4,6 +4,53 @@
 
 ![overview architecture](./docs/img/overview_arch.png "Architecture")
 
+## Local MQTT broker
+
+In order to relay messages to the AWS IoT endpoint, a MQTT broker has to be set up. However, it seems that Home Assistant doesn't fully support ActiveMQ nor RabbitMQ, so the safer (and recommended by HA) alternative would be using `eclipse-mosquitto` which is an open source message broker that implements MQTT on its versions 3.1, 3.1.1 and 5.0. 
+
+More info:
+
+- [Project page](https://mosquitto.org/)
+- [Github repo](https://github.com/eclipse/mosquitto)
+
+### Bridge config
+
+- `connection <connection_name>` will help identify the bridge in case there are more than one, both in Cloudwatch and the local mosquitto logs.
+- `aws_iot_data_endpoint` is the AWS IoT MQTT endpoint our local bridge will connect to. Should be of the following shape `<random_prefix>-ats.iot.<aws_region>.amazonaws.com`. Can be retrieved through [Terraform outputs](../README.md#outputs).
+- `client_id` is just a unique identifier for each client connected to the broker.
+- `bridge_(ca|cert|key)file` are the SSL/TLS certificates used to connect to AWS IoT. The setup requires 3 files. An [Amazon public Root CA certificate](https://www.amazontrust.com/repository/AmazonRootCA1.pem), and the IoT Certificate (and Private Key) created with Terraform.
+
+```
+# ============================================================
+# Bridge to AWS IOT
+# ============================================================
+
+connection <connection_name>
+
+address <aws_iot_data_endpoint>:8883
+
+<list_of_topics_to_bridge>
+
+bridge_protocol_version mqttv311
+bridge_insecure false
+
+cleansession true
+clientid <client_id>
+start_type automatic
+notifications false
+log_type all
+
+# ============================================================
+# Certificate based SSL/TLS support
+# ============================================================
+
+bridge_cafile <root_ca_certificate_file>
+bridge_certfile <aws_iot_created_certificate_file>
+bridge_keyfile <aws_iot_created_certificate_private_key_file>
+
+#END of bridge.conf
+```
+
 ## Terraform stack
 <!-- BEGIN_TF_DOCS -->
 ### Requirements
@@ -63,7 +110,7 @@
 
 ## Tips
 
-### Check connection with AWS IoT endpoint
+### Check connection against AWS IoT endpoint
 ```
 mosquitto_pub -h "${IOT_HOST}" -p 8883 \
   --key /mosquitto/certs/private.key \
